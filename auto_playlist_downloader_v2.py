@@ -1,43 +1,39 @@
-def playlist_downloader(new_directory_name, playlist_url):
-    """
-    Returns a new directory containing the downloaded Youtube playlist
+import tkinter as tk
+import auto_playlist_downloader_v1 as apd1 
 
-        Parameters:
-            new_directory_name (str): name of the new directory where you wish to download the playlist
-            playlist_url (str): url of the playlist
-        
-        Returns:
-            None
-    """
-    import os
-    from pytube import Playlist
+root = tk.Tk()
+root.title('Youtube Playlist Downloader')
+root.configure(bg='#A9A9A9')
+root.geometry('600x480')
+icon_pic = tk.PhotoImage(file="youtube_logo.png")
+root.iconphoto(False, icon_pic)
 
-    # getting the path of the current working directory
-    current_path = os.getcwd()
+root.resizable(height=False, width=False)
 
-    # path for new directory
-    new_path = current_path + '\\' + new_directory_name
-    try:
-        os.makedirs(new_path)
-    except:
-        raise TypeError('The directory name is all existent')
-    
-    # changing the directory to the new new path
-    os.chdir(new_path)
+# NEW DIRECTORY INFO
+label_new_path = tk.Label(root, text='Enter the name of the new folder to for th eplaylist', bd=8, font=('calibre', 12, 'bold'), height=1, bg='#A9A9A9', foreground='white')
+label_new_path.pack(pady=19)
 
-    # downloading the videos in the playlist
-    url = playlist_url
-    playlist = Playlist(url)
-    counter = 0
-    for video in playlist.videos:
-        counter += 1
-        video.streams.get_highest_resolution().download()
-        if counter <= 1:
-            print(f"{counter} file downloaded")
-        else: 
-            print(f"{counter} files downloaded")
+new_path_str = tk.StringVar()
+entry_new_path= tk.Entry(root, textvariable=new_path_str, selectbackground='blue', selectforeground='white', width=95)
+entry_new_path.pack()
 
 
-if __name__ == "__main__":
-    url = 'https://www.youtube.com/watch?v=RXkAq9p24FQ&list=PLVErkmXVj2RMV8DdXwPVz1bS5vzbGjUN5'
-    playlist_downloader('new_playlist_folder', url)
+# URL INFO
+label_url = tk.Label(root, text='Enter the URL of the playlist', bd=8, font=('calibre', 12, 'bold'), height=1, bg='#A9A9A9', foreground='white')
+label_url.pack(pady=19)
+
+url_str = tk.StringVar()
+entry_url = tk.Entry(root, textvariable=url_str, selectbackground='blue', selectforeground='white', width=95)
+entry_url.pack()
+
+download_button = tk.Button(root, text='Download Playlist', bg='#A9A9A9', foreground='white', activebackground='white', \
+                    activeforeground='#A9A9A9', relief=tk.RAISED, width=28, height=1, font=('calibre', 12, 'bold'), cursor='arrow')
+
+download_button.pack(pady=12)
+
+
+
+
+
+root.mainloop()
