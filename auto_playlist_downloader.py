@@ -1,4 +1,14 @@
 def playlist_downloader(new_directory_name, playlist_url):
+    """
+    Returns a new directory containing the downloaded Youtube playlist
+
+        Parameters:
+            new_directory_name (str): name of the new directory where you wish to download the playlist
+            playlist_url (str): url of the playlist
+        
+        Returns:
+            None
+    """
     import os
     from pytube import Playlist
 
