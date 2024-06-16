@@ -14,7 +14,7 @@ The version two file contains the source code for the GUI implementation of the 
 - In order to use the GUI version, you can download the ```main.exe``` file in the dist directory and install it on your Windows PCs
 - For MACOS and Linux users,
     - clone the repository
-    - use pyinstaller to build the executable file by running the following command;
+    - use pyinstaller to build the executable file by running the following command;  
         ```pip install pyinstaller``` - (to install pyinstaller)
         ```pyinstaller --onefile --name YPD --icon images/YPD.ico --windowed src/main.py``` - (to build the executable)
 
