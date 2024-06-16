@@ -45,31 +45,48 @@ def destroy_widgets_after_download():
             widget.destroy()
 
 
-def add_labels(message):
-    download_log = tk.Label(root, text=message, width=75, highlightthickness=1, highlightbackground='#A9A9A9', height=1)
-    download_log.pack()
-    widgets_list.append(download_log)
-    root.update()  # Force an update of the GUI
+# def add_labels(message):
+#     download_log = tk.Label(root, text=message, width=75, highlightthickness=1, highlightbackground='#A9A9A9', height=1)
+#     download_log.pack()
+#     widgets_list.append(download_log)
+#     root.update()  # Force an update of the GUI
 
 download_log = tk.Label(root, text='Number of files downloaded: \n\n0', width=75, highlightthickness=5, highlightbackground='red', height=5)
 download_log.pack(pady=18)
 widgets_list.append(download_log)
 
 message_queue = queue.Queue()
+stop_download = tk.BooleanVar(value=False)
 
-def download_videos(playlist):
+def download_videos(playlist, stop_button):
+    global stop_download
     for i in range(len(playlist.videos)):
+        if stop_download.get():
+            break
+        time.sleep(1)
         # playlist.videos[i].streams.get_highest_resolution().download()
         message = f"Number of files downloaded: \n\n{i + 1}"
         message_queue.put(message)
-    root.after_idle(lambda: download_button.config(state='normal'))
+        root.after(0, label_updater)
+    root.after(0, lambda: download_button.config(state='normal'))
+    root.after(0, lambda: stop_button.pack_forget())
+    stop_download.set(False)
+
         
+        
+def stop_downloading(stop_button):
+    stop_download.set(True)
+    stop_button.pack_forget()
+    
 
 def label_updater():
-    while not message_queue.empty():
-        new_message = message_queue.get()
-        download_log.config(text=new_message)
-    root.after(100, label_updater)
+    try:
+        while not message_queue.empty():
+            new_message = message_queue.get_nowait()
+            download_log.config(text=new_message)
+    except queue.Empty:
+        pass
+    root.after(10, label_updater)
 
 def get_playlist():
     download_button.config(state='disabled')
@@ -90,10 +107,12 @@ def get_playlist():
             widgets_list.append(warning_label)
             return
 
-
-        # stop_button = tk.Button(root, text='STOP', bg='red', foreground='white', activebackground='white', \
-        #                 activeforeground='red', relief=tk.RAISED, width=20, height=1, font=('calibre', 12, 'bold'), cursor='arrow')
-        # stop_button.pack()
+        # global stop_button
+        stop_button = tk.Button(root, text='STOP', bg='red', foreground='white', activebackground='white', \
+                        activeforeground='red', relief=tk.RAISED, width=20, height=1, font=('calibre', 12, 'bold'), cursor='arrow', \
+                            command=lambda: stop_downloading(stop_button))
+        stop_button.pack()
+        widgets_list.append(stop_button)
 
 
         current_path = os.getcwd()
@@ -107,23 +126,18 @@ def get_playlist():
         os.chdir(new_path)
 
         # downloading the videos in the playlist
-        download_thread = threading.Thread(target=download_videos, args=(playlist,))
+        download_thread = threading.Thread(target=download_videos, args=(playlist,stop_button))
         download_thread.start()
         label_updater()
-        # for i in range(len(playlist.videos)):
-        #     # playlist.videos[i].streams.get_highest_resolution().download()
-        #     message = f"Number of files downloaded: \n\n{i + 1}"
-        #     download_log.config(text=message)
-        # download_button.config(state='active')
+
     except:
         warning_label = tk.Label(root, text='Kindly fill the necessary fields with the correct details!', height=5, anchor=tk.CENTER, \
                                  font=('calibre', 16, 'bold'), fg='red', bg='#A9A9A9')
         warning_label.pack(pady=10)
         widgets_list.append(warning_label)
-        # warning_label.destroy()
         download_button.config(state='active')
 
-
+root.after(10, label_updater)
 
 download_button = tk.Button(root, text='Download Playlist', bg='#A9A9A9', foreground='white', activebackground='white', \
                     activeforeground='#A9A9A9', relief=tk.RAISED, width=28, height=1, font=('calibre', 12, 'bold'), cursor='arrow',
