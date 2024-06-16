@@ -11,7 +11,21 @@ In order to use this code;
     - url of the playlist
 
 The version two file contains the source code for the GUI implementation of the Youtube Playlist Downloader
+- In order to use the GUI version, you can download the .exe file and install it on your Windows PCs
+- For MACOS and Linux users,
+    - clone the repository
+    - use pyinstaller to build the executable file by running the following command;
+        ```pip install pyinstaller``` - (to install pyinstaller)
+        ```pyinstaller auto_playlist_downloader_v2.py``` - (to build the executable)
 
+## Tools Used
+-  This application was built using the Python programming language (version 3.10.8). The modules used are
+    - tkinter
+    - os
+    - queue
+    - threading
+    - pytube
+    
 
 ## References
 - [Doenloading a Youtube playlist with Python](https://x.com/clcoding/status/1801801848304640129)
