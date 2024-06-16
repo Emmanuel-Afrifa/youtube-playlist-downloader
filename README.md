@@ -1,4 +1,4 @@
-# Youtube Playlist Downloader (YPD v1)
+# Youtube Playlist Downloader (YPD)
 
 This repository contains the source code for a python program that automates the downloading of a Youtube playlist
 
