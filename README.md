@@ -10,10 +10,13 @@ In order to use this code;
     - Direcetory in which the playlist will be downloaded
     - url of the playlist
 
+The version two file contains the source code for the GUI implementation of the Youtube Playlist Downloader
+
 
 ## References
 - [Doenloading a Youtube playlist with Python](https://x.com/clcoding/status/1801801848304640129)
 - [OS Module in Python](https://www.geeksforgeeks.org/os-module-python-examples/)
+- [Building Modern GUIs with tkinter and Python by Saurabh Chandrakar nd Dr Nilesh Bhaskarrao Bahadure](https://www.bing.com/ck/a?!&&p=d61167f3e6f2360cJmltdHM9MTcxODQ5NjAwMCZpZ3VpZD0zODg3OGRmNC0zZTU3LTZiNTUtM2U1MC05ZTA3M2ZlYzZhNjAmaW5zaWQ9NTE4Mw&ptn=3&ver=2&hsh=3&fclid=38878df4-3e57-6b55-3e50-9e073fec6a60&psq=building+modern+guis+with+tkinter+and+python+saurabh+chandrakar&u=a1aHR0cHM6Ly9hcmNoaXZlLm9yZy9kZXRhaWxzL2J1aWxkaW5nLW1vZGVybi1ndWlzLXdpdGgtdGtpbnRlci1hbmQtcHl0aG9uLTIwMjM&ntb=1)
 
 
 ## Author
