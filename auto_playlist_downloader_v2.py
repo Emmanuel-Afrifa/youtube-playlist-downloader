@@ -9,7 +9,7 @@ import time
 root = tk.Tk()
 root.title('Youtube Playlist Downloader')
 root.configure(bg='#A9A9A9')
-root.geometry('600x520')
+root.geometry('600x480')
 icon_pic = tk.PhotoImage(file="youtube_logo.png")
 root.iconphoto(False, icon_pic)
 
@@ -35,16 +35,26 @@ entry_url.pack()
 
 
 # defining a function to download the playlists
-def showwe():
-    url = url_str.get()
-    try:
-        url = url_str.get()
-        playlist = Playlist(url)
-        counter = 0
 
-        stop_button = tk.Button(root, text='STOP', bg='red', foreground='white', activebackground='white', \
-                        activeforeground='red', relief=tk.RAISED, width=20, height=1, font=('calibre', 12, 'bold'), cursor='arrow')
-        stop_button.pack()
+def get_playlist():
+        url = url_str.get()
+    # try:
+        # print(len(root.winfo_children))
+        url = url_str.get()
+        if Playlist(url):
+            playlist = Playlist(url)
+        else:
+            print('boooo')
+
+            warning_label = tk.Label(root, text='Kindly fill the necessary fields with the correct details!', height=5, anchor=tk.CENTER, \
+                                 font=('calibre', 16, 'bold'), fg='red', bg='#A9A9A9')
+            warning_label.pack(pady=10)
+            return
+
+
+        # stop_button = tk.Button(root, text='STOP', bg='red', foreground='white', activebackground='white', \
+        #                 activeforeground='red', relief=tk.RAISED, width=20, height=1, font=('calibre', 12, 'bold'), cursor='arrow')
+        # stop_button.pack()
 
         label_frame = tk.Frame(width=90, height=8)
         label_frame.pack(pady=10)
@@ -76,7 +86,7 @@ def showwe():
             listbox.config(yscrollcommand=scroll.set) 
             scroll.config(command=listbox.yview)
         
-    except:
+    # except:
         warning_label = tk.Label(root, text='Kindly fill the necessary fields with the correct details!', height=5, anchor=tk.CENTER, \
                                  font=('calibre', 16, 'bold'), fg='red', bg='#A9A9A9')
         warning_label.pack(pady=10)
@@ -84,14 +94,10 @@ def showwe():
 
 
 
-
-
 download_button = tk.Button(root, text='Download Playlist', bg='#A9A9A9', foreground='white', activebackground='white', \
                     activeforeground='#A9A9A9', relief=tk.RAISED, width=28, height=1, font=('calibre', 12, 'bold'), cursor='arrow',
-                    command=showwe)
+                    command=get_playlist)
 download_button.pack(pady=12)
-# command=lambda: apd1.playlist_downloader(new_path_str.get(), label_url.get())
-# print(new_path_str.get(), url_str.get())
 root.mainloop()
 
 
