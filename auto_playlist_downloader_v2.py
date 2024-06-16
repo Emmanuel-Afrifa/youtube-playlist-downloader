@@ -15,6 +15,7 @@ root.iconphoto(False, icon_pic)
 
 root.resizable(height=False, width=False)
 
+
 # NEW DIRECTORY INFO
 label_new_path = tk.Label(root, text='Enter the name of the new folder for the playlist', bd=8, font=('calibre', 12, 'bold'), height=1, bg='#A9A9A9', foreground='white')
 label_new_path.pack(pady=19)
