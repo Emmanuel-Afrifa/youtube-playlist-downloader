@@ -37,9 +37,8 @@ entry_url.pack()
 # defining a function to download the playlists
 
 def get_playlist():
-        url = url_str.get()
-    # try:
-        # print(len(root.winfo_children))
+    url = url_str.get()
+    try:
         url = url_str.get()
         if Playlist(url):
             playlist = Playlist(url)
@@ -84,9 +83,8 @@ def get_playlist():
             listbox.insert(tk.END, message)
             listbox.pack()
             listbox.config(yscrollcommand=scroll.set) 
-            scroll.config(command=listbox.yview)
-        
-    # except:
+            scroll.config(command=listbox.yview)    
+    except:
         warning_label = tk.Label(root, text='Kindly fill the necessary fields with the correct details!', height=5, anchor=tk.CENTER, \
                                  font=('calibre', 16, 'bold'), fg='red', bg='#A9A9A9')
         warning_label.pack(pady=10)
