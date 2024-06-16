@@ -16,7 +16,7 @@ The version two file contains the source code for the GUI implementation of the 
     - clone the repository
     - use pyinstaller to build the executable file by running the following command;
         ```pip install pyinstaller``` - (to install pyinstaller)
-        ```pyinstaller main.py``` - (to build the executable)
+        ```pyinstaller --onefile --name YPD --icon images/YPD.ico --windowed src/main.py``` - (to build the executable)
 
 ## Tools Used
 -  This application was built using the Python programming language (version 3.10.8). The modules used are
