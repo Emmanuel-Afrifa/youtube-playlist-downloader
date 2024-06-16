@@ -44,13 +44,6 @@ def destroy_widgets_after_download():
         for widget in widgets_list[download_index+1:]:
             widget.destroy()
 
-
-# def add_labels(message):
-#     download_log = tk.Label(root, text=message, width=75, highlightthickness=1, highlightbackground='#A9A9A9', height=1)
-#     download_log.pack()
-#     widgets_list.append(download_log)
-#     root.update()  # Force an update of the GUI
-
 download_log = tk.Label(root, text='Number of files downloaded: \n\n0', width=75, highlightthickness=5, highlightbackground='red', height=5)
 download_log.pack(pady=18)
 widgets_list.append(download_log)
@@ -63,11 +56,11 @@ def download_videos(playlist, stop_button):
     for i in range(len(playlist.videos)):
         if stop_download.get():
             break
-        time.sleep(1)
-        # playlist.videos[i].streams.get_highest_resolution().download()
+        
         message = f"Number of files downloaded: \n\n{i + 1}"
         message_queue.put(message)
         root.after(0, label_updater)
+        playlist.videos[i].streams.get_highest_resolution().download()
     root.after(0, lambda: download_button.config(state='normal'))
     root.after(0, lambda: stop_button.pack_forget())
     stop_download.set(False)
