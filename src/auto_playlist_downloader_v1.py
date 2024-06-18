@@ -39,5 +39,5 @@ def playlist_downloader(new_directory_name, playlist_url):
 
 
 if __name__ == "__main__":
-    url = 'https://www.youtube.com/watch?v=RXkAq9p24FQ&list=PLVErkmXVj2RMV8DdXwPVz1bS5vzbGjUN5'
-    playlist_downloader('new_playlist_folder', url)
+    url = 'https://www.youtube.com/watch?v=Ri7-vnrJD3k&list=PLgdrWpDs7VaEpI5KfP47WOF9VjAl0ilSY'
+    playlist_downloader('fav rep', url)
